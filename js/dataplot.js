@@ -42,22 +42,29 @@ document.getElementById('random').onclick = function() {
 }
 
 
+var mockData = [];
+var n_movies = 0;
+$.getJSON("datasets/data_autocomplete_all.json", function(json){
+    mockData = json;
+    n_movies = mockData.length;
+    var idx_rnd = Math.floor((Math.random() * n_movies));
+    updatePage(mockData[idx_rnd]);
+    updatePage(first_row);
+    
+});
+
+
 
 var ajax = new XMLHttpRequest();
 ajax.open("GET", "datasets/data_autocomplete_all.json", true);
 ajax.onload = function(mockData) {
     mockData = JSON.parse(ajax.responseText);
-	var list = JSON.parse(ajax.responseText).map(function(i) { return i.title; });
-	new Awesomplete(document.querySelector("input"),{ list: list });
+    var list = mockData.map(function(i) { return i.title; });
+    new Awesomplete(document.querySelector("input"),{ list: list });
 };
 ajax.send();
 
-var mockData = [];
-var n_movies = 0;
-$.getJSON("datasets/newx_200.json", function(json){
-    mockData = json;
-    n_movies = mockData.length;
-    var first_row = getDatabyKey('title', 'Cour de ferme à Pfulgriesheim = Bauernhof in Pfulgriesheim')[0];
-    updatePage(first_row);
-    
-});
+//var mylist = mockData.map(function (i) { return i.title;});
+//var widget = new Awesomplete(document.querySelector("input"), {list: mylist});
+
+
