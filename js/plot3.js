@@ -110,7 +110,7 @@ function get_dataset(){
     if (dataset) {
        return "datasets/" + dataset + ".json";
     } else {
-        return "datasets/x.json";
+        return "datasets/visx_200_10.json";
     }
 }
 
